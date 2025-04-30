@@ -20,20 +20,22 @@ if not GOOGLE_API_KEY:
 llm = ChatGoogleGenerativeAI(model=GEMINI_MODEL, temperature=0.7, google_api_key=GOOGLE_API_KEY)
 
 # Create custom prompt
-TEMPLATE = TEMPLATE = """
-You are an intelligent AI assistant. Your job is to give **concise, accurate, and helpful answers** to user questions.
+TEMPLATE = """
+You are an intelligent AI assistant. Respond to user questions with **brief, accurate, and clearly stated answers**.
 
-📝 Past Conversations:
+📝 Past Context:
 {history}
 
-💬 User's Question:
+💬 Current Question:
 {input}
 
-📌 Guidelines:
-- Answer directly and clearly.
-- Keep it short unless the user asks for more detail.
-- If you're unsure, say: "I'm not sure, but here's what I can infer..."
+🎯 Guidelines:
+- Be short and direct (1–3 sentences max).
+- Do not overexplain unless asked.
+- Use clear, professional language.
+- If unsure, say: "I'm not certain, but here's what I can infer..."
 """
+
 
 prompt = PromptTemplate.from_template(TEMPLATE)
 
